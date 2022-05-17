@@ -13,10 +13,6 @@ export class LoginComponent implements OnInit {
   public user: Iuser;
   constructor(private authService: AuthService, private router: Router) {
     if (this.authService.currentUserValue) {
-      console.log(
-        '(this.authService.currentUser',
-        this.authService.currentUserValue
-      );
       this.router.navigate(['/user/home']);
     }
     this.user = {

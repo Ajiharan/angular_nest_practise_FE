@@ -30,7 +30,7 @@ export class AuthGuardService implements CanActivate {
     const expectedRole = route.data['role'];
 
     const decodedToken = this.helper.decodeToken(
-      localStorage.getItem('currentUser')!
+      JSON.parse(localStorage.getItem('currentUser')!)?.options
     );
     console.log('decodedToken', decodedToken);
     if (currentUser && expectedRole === decodedToken.role) {

@@ -8,8 +8,7 @@ import { Iuser } from '../models/user';
 })
 export class AuthService {
   private currentUserSubject: BehaviorSubject<Iuser | null>;
-  private baseUrl =
-    'https://900790c9-982e-42d4-a8e5-6362d6786cf3.mock.pstmn.io';
+  private baseUrl = 'http://localhost:3000';
   public currentUser: Observable<Iuser | null>;
 
   constructor(private http: HttpClient) {
@@ -27,12 +26,19 @@ export class AuthService {
     return this.http
       .post<any>(`${this.baseUrl}/user/login`, { userName, password })
       .pipe(
-        map((user) => {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-          return user;
+        map((data) => {
+          localStorage.setItem('currentUser', JSON.stringify(data));
+          this.currentUserSubject.next(data);
+          return data;
         })
       );
+  }
+
+  register(userName: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/user/create`, {
+      userName,
+      password,
+    });
   }
 
   logout() {

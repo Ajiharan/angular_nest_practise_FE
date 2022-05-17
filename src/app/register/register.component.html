@@ -1,1 +1,43 @@
-<p>register works!</p>
+<div class="register-page-container">
+  <h4>SignUp User</h4>
+  <form [formGroup]="registerFormroup" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Username</label>
+      <input
+        type="text"
+        formControlName="userName"
+        placeholder="John wick...."
+      />
+      <p class="register-page-container-errorMsg">
+        {{ validInput(registerFormroup.get("userName")) }}
+      </p>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="******...."
+      />
+      <p class="register-page-container-errorMsg">
+        {{ validInput(registerFormroup.get("password")) }}
+      </p>
+    </div>
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input
+        type="password"
+        formControlName="confirmPassword"
+        placeholder="******...."
+      />
+      <p class="register-page-container-errorMsg">
+        {{ validInput(registerFormroup.get("confirmPassword")) }}
+      </p>
+    </div>
+    <input
+      type="submit"
+      value="Register"
+      [disabled]="!registerFormroup.valid"
+    />
+  </form>
+</div>
