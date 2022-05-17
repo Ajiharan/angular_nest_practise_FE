@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
     this.productService
       .getUsers({ limit: this.limit, offset: this.offset })
       .subscribe((res) => {
-        console.log('res', res);
         this.count = res[0];
         this.users = res[1];
       });
@@ -33,6 +32,15 @@ export class HomeComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/']);
   }
+
+  onChange(event: any): void {
+    this.productService
+      .getUsers({ limit: this.limit, offset: this.offset }, event.target.value)
+      .subscribe((res) => {
+        this.count = res[0];
+        this.users = res[1];
+      });
+  }
   getPaginatorData(event: PageEvent): PageEvent {
     console.log(event);
     this.limit = event.pageSize;
@@ -40,7 +48,6 @@ export class HomeComponent implements OnInit {
     this.productService
       .getUsers({ limit: this.limit, offset: this.offset })
       .subscribe((res) => {
-        console.log('res', res);
         this.count = res[0];
         this.users = res[1];
       });

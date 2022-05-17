@@ -2,6 +2,7 @@
   <p>Home</p>
   <button (click)="logout()">Logout</button>
   <div>
+    <input type="text" (keyup)="onChange($event)" />
     <p *ngFor="let user of users">{{ user?.userName }}</p>
   </div>
   <mat-paginator
